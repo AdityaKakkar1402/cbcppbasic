@@ -63,7 +63,7 @@ void insertInMiddle(node *&head, int d, int p)
     {
         int jump = 1;
         node *temp = head;
-        while (jump <= p - 1)
+        while (jump < p - 1)
         {
             temp = temp->next;
             jump++;
@@ -90,6 +90,93 @@ void insertAtTail(node *&head, int d)
     return;
 }
 
+void deleteHead(node *&head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+    node *temp = head->next;
+    delete head;
+    head = temp;
+}
+// void deleteAtTail(node *&head)
+// {
+//     if (head == NULL)
+//     {
+//         return;
+//     }
+//     else if (head->next == NULL)
+//     {
+//         deleteHead(head);
+//         return;
+//     }
+
+//     else
+//     {
+//         node *temp = head;
+//         while (temp->next->next != NULL)
+//         {
+//             temp = temp->next;
+//         }
+//         node *tobedeleted = temp->next;
+//         temp->next = NULL;
+//         delete tobedeleted;
+//     }
+// }
+void deleteAtTail(node *&head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+    else if (head->next == NULL)
+    {
+        deleteHead(head);
+        return;
+    }
+
+    else
+    {
+        node *temp = head;
+        while (temp->next->next != NULL)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = NULL;
+        temp = temp->next;
+        delete temp;
+    }
+}
+
+void deletePosition(node *&head, int p)
+{
+    if (head == NULL || head->next == NULL || p <= 1)
+    {
+        return;
+    }
+
+    else if (p >= length(head))
+    {
+        deleteAtTail(head);
+    }
+
+    else
+    {
+        int jump = 1;
+        node *temp = head;
+        while (jump < p - 1)
+        {
+            temp = temp->next;
+            jump++;
+        }
+        node *tobedeleted = temp->next;
+        temp->next = temp->next->next;
+        delete tobedeleted;
+    }
+}
+
 void printNode(node *head)
 {
     while (head != NULL)
@@ -104,15 +191,8 @@ int main()
     node *head = NULL;
     insertATHead(head, 4);
     insertAtTail(head, 8);
+    insertAtTail(head, 9);
     insertInMiddle(head, 3, 2);
 
-    insertATHead(head, 2);
-
-    insertATHead(head, 1);
-
-    insertATHead(head, 0);
-    insertInMiddle(head, 3, 3);
-    insertAtTail(head, 7);
-    insertAtTail(head, 8);
     printNode(head);
 }
