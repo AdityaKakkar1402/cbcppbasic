@@ -177,6 +177,43 @@ void deletePosition(node *&head, int p)
     }
 }
 
+//only linear search can be implemented in linked list
+//as it will be more feasible. Doing binary search
+//will take more time than usual
+//and we cannot directly access ith term.
+
+//linear search
+bool search(node *head, int key)
+{
+    node *temp = head;
+    while (temp != NULL)
+    {
+        if (temp->data == key)
+        {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+//recursively search
+bool searchRecursive(node *head, int key)
+{
+    if (head == NULL)
+    {
+        return false;
+    }
+    //rec case check at head,remaining linked list
+    if (head->data == key)
+    {
+        return true;
+    }
+    else
+    {
+        return searchRecursive(head->next, key);
+    }
+}
+
 void printNode(node *head)
 {
     while (head != NULL)
@@ -193,6 +230,39 @@ int main()
     insertAtTail(head, 8);
     insertAtTail(head, 9);
     insertInMiddle(head, 3, 2);
+    insertATHead(head, 2);
+
+    insertATHead(head, 1);
+
+    insertATHead(head, 0);
+    insertInMiddle(head, 3, 3);
+    insertAtTail(head, 7);
+    insertAtTail(head, 8);
+    insertAtTail(head, 9);
+    deleteHead(head);
+    deleteHead(head);
+    deleteAtTail(head);
+    deletePosition(head, 3);
 
     printNode(head);
+    int key;
+
+    cin >> key;
+    cin >> key;
+    if (searchRecursive(head, key))
+    {
+        cout << "found";
+    }
+    else
+    {
+        cout << "not found";
+    }
+    if (search(head, key))
+    {
+        cout << "found";
+    }
+    else
+    {
+        cout << "not found";
+    }
 }

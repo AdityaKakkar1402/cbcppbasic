@@ -14,23 +14,25 @@ public:
     }
 };
 
-void insertAtHead(node *&head, int d)
+void insertHead(node *&head, int d)
 {
     if (head == NULL)
     {
         head = new node(d);
-        return;
     }
-    node *n = new node(d);
-    n->next = head;
-    head = n;
+    else
+    {
+        node *n = new node(d);
+        n->next = head;
+        head = n;
+    }
 }
 
-void printLl(node *head)
+void printll(node *head)
 {
     while (head != NULL)
     {
-        cout << head->data << "->";
+        cout << head->data << " ";
         head = head->next;
     }
 }
@@ -38,9 +40,8 @@ void printLl(node *head)
 int main()
 {
     node *head = NULL;
-    insertAtHead(head, 3);
-    insertAtHead(head, 2);
-    insertAtHead(head, 1);
-    insertAtHead(head, 0);
-    printLl(head);
+    insertHead(head, 3);
+    insertHead(head, 7);
+    insertHead(head, 9);
+    printll(head);
 }
